@@ -1,11 +1,11 @@
 {
-    'name': 'Daily Cash Balance Report',
+    'name': 'Daily Cash Balance',
     'version': '19.0.1.0.0',
     'category': 'Accounting/Accounting',
     'summary': 'Daily cash position per bank journal: Opening, Incoming, Outgoing, Closing',
     'description': """
-Daily Cash Balance Report
-=========================
+Daily Cash Balance
+==================
 
 A daily cash position for every active bank journal, as a standard Odoo
 accounting report with the usual date filter, journal filter, print, export

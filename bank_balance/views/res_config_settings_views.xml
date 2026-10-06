@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_bb" model="ir.ui.view">
+        <field name="name">res.config.settings.form.bank.balance</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='analytic_accounting_setting_container']" position="after">
+                <block title="Bank Balance" id="bb_settings_container">
+                    <setting id="bb_bank_accounts_setting"
+                             string="Bank Accounts"
+                             help="Accounts holding the cleared bank position. Leave empty to use each bank journal's own default account.">
+                        <field name="bb_bank_account_ids" widget="many2many_tags"
+                               options="{'no_create': True}"/>
+                    </setting>
+                    <setting id="bb_outstanding_accounts_setting"
+                             string="Outstanding Accounts"
+                             help="Outstanding Receipts / Payments accounts. Leave empty to read them from the journals' payment methods.">
+                        <field name="bb_outstanding_account_ids" widget="many2many_tags"
+                               options="{'no_create': True}"/>
+                    </setting>
+                    <setting id="bb_include_outstanding_setting"
+                             string="Include Outstanding Payments"
+                             help="Include money received or paid but not yet cleared to the bank. Off = cleared position only.">
+                        <field name="bb_include_outstanding"/>
+                        <div class="content-group" invisible="not bb_include_outstanding">
+                            <div class="mt16">
+                                <field name="bb_outstanding_unreconciled_only"
+                                       class="oe_inline"/>
+                                <span class="ms-2">Only count outstanding items while unreconciled</span>
+                            </div>
+                            <div class="mt16">
+                                <label for="bb_outstanding_cutoff_date"
+                                       string="Ignore outstanding on or before"/>
+                                <field name="bb_outstanding_cutoff_date"
+                                       class="oe_inline ms-2"/>
+                                <div class="text-muted">
+                                    Set this when opening balances were imported onto the
+                                    outstanding accounts as the contra side of the
+                                    bank-account openings.
+                                </div>
+                            </div>
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>
