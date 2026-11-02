@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bank_balance_report" model="account.report">
+        <field name="name">Bank Balance</field>
+        <field name="custom_handler_model_name">bank.balance.report.handler</field>
+        <field name="filter_date_range" eval="True"/>
+        <field name="default_opening_date_filter">today</field>
+        <field name="filter_journals" eval="True"/>
+        <field name="filter_show_draft" eval="False"/>
+        <field name="filter_unreconciled" eval="False"/>
+        <field name="filter_analytic" eval="False"/>
+        <field name="filter_multi_company">selector</field>
+        <field name="column_ids">
+            <record id="bb_column_opening" model="account.report.column">
+                <field name="name">Opening Balance</field>
+                <field name="expression_label">opening</field>
+                <field name="figure_type">monetary</field>
+                <field name="sequence">1</field>
+            </record>
+            <record id="bb_column_incoming" model="account.report.column">
+                <field name="name">Incoming</field>
+                <field name="expression_label">incoming</field>
+                <field name="figure_type">monetary</field>
+                <field name="sequence">2</field>
+            </record>
+            <record id="bb_column_outgoing" model="account.report.column">
+                <field name="name">Outgoing</field>
+                <field name="expression_label">outgoing</field>
+                <field name="figure_type">monetary</field>
+                <field name="sequence">3</field>
+            </record>
+            <record id="bb_column_closing" model="account.report.column">
+                <field name="name">Closing Balance</field>
+                <field name="expression_label">closing</field>
+                <field name="figure_type">monetary</field>
+                <field name="sequence">4</field>
+            </record>
+        </field>
+    </record>
+</odoo>

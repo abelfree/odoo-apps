@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Daily Cash Balance Report</title>
+</head>
+<body style="margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#2b3440;line-height:1.6;">
+
+<div style="background:#1f3d5c;color:#fff;padding:56px 48px;">
+  <h1 style="margin:0 0 12px;font-size:40px;font-weight:700;">Daily Cash Balance Report</h1>
+  <p style="margin:0;font-size:20px;color:#bed4e8;">
+    A daily cash position for every bank journal, where Closing always ties out.
+  </p>
+</div>
+
+<div style="max-width:980px;margin:0 auto;padding:48px;">
+
+  <h2 style="font-size:26px;margin:0 0 16px;color:#1f3d5c;">What it does</h2>
+  <p style="font-size:17px;">
+    Adds a standard Odoo accounting report giving one row per active bank journal,
+    with the opening position, the period's movements, and the resulting closing
+    balance. It comes with the usual date filter, journal filter, print, export
+    and fold controls, and recalculates as soon as the date changes.
+  </p>
+
+  <table style="width:100%;border-collapse:collapse;margin:28px 0;font-size:16px;">
+    <thead>
+      <tr style="background:#f1f5f9;">
+        <th style="text-align:left;padding:12px;border-bottom:2px solid #cbd5e1;">Column</th>
+        <th style="text-align:left;padding:12px;border-bottom:2px solid #cbd5e1;">Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:12px;border-bottom:1px solid #e2e8f0;"><b>Opening Balance</b></td>
+          <td style="padding:12px;border-bottom:1px solid #e2e8f0;">Position at the start of the selected period</td></tr>
+      <tr><td style="padding:12px;border-bottom:1px solid #e2e8f0;"><b>Incoming</b></td>
+          <td style="padding:12px;border-bottom:1px solid #e2e8f0;">Debit movements within the period</td></tr>
+      <tr><td style="padding:12px;border-bottom:1px solid #e2e8f0;"><b>Outgoing</b></td>
+          <td style="padding:12px;border-bottom:1px solid #e2e8f0;">Credit movements within the period, shown positive</td></tr>
+      <tr><td style="padding:12px;border-bottom:1px solid #e2e8f0;"><b>Closing Balance</b></td>
+          <td style="padding:12px;border-bottom:1px solid #e2e8f0;">Opening + Incoming &minus; Outgoing</td></tr>
+    </tbody>
+  </table>
+
+  <div style="background:#f1f5f9;border-left:4px solid #1f3d5c;padding:20px 24px;margin:28px 0;font-size:16px;">
+    Closing is computed from the other three columns, so every row adds up. The
+    report can be read as a cash statement rather than checked against one.
+  </div>
+
+  <h2 style="font-size:26px;margin:40px 0 16px;color:#1f3d5c;">Configuration</h2>
+  <p style="font-size:17px;">
+    Everything lives under <b>Accounting &rsaquo; Configuration &rsaquo; Settings</b>,
+    and every setting has a working default. On most databases the report is
+    correct with no configuration at all.
+  </p>
+
+  <table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:16px;">
+    <tbody>
+      <tr><td style="padding:12px;border-bottom:1px solid #e2e8f0;width:38%;"><b>Bank Accounts</b></td>
+          <td style="padding:12px;border-bottom:1px solid #e2e8f0;">Defaults to each bank journal's own default account.</td></tr>
+      <tr><td style="padding:12px;border-bottom:1px solid #e2e8f0;"><b>Outstanding Accounts</b></td>
+          <td style="padding:12px;border-bottom:1px solid #e2e8f0;">Defaults to the accounts on the journals' payment methods.</td></tr>
+      <tr><td style="padding:12px;border-bottom:1px solid #e2e8f0;"><b>Include Outstanding Payments</b></td>
+          <td style="padding:12px;border-bottom:1px solid #e2e8f0;">Off by default, giving the cleared position that matches the bank statement. On, it adds money received or paid but not yet reconciled.</td></tr>
+      <tr><td style="padding:12px;border-bottom:1px solid #e2e8f0;"><b>Only Unreconciled Outstanding</b></td>
+          <td style="padding:12px;border-bottom:1px solid #e2e8f0;">Keeps a payment from counting twice, once while pending and again once it clears.</td></tr>
+      <tr><td style="padding:12px;border-bottom:1px solid #e2e8f0;"><b>Ignore Outstanding On or Before</b></td>
+          <td style="padding:12px;border-bottom:1px solid #e2e8f0;">For databases whose opening balances were imported onto the outstanding accounts as the contra side of the bank-account openings.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="font-size:26px;margin:40px 0 16px;color:#1f3d5c;">Notes</h2>
+  <ul style="font-size:17px;padding-left:22px;">
+    <li>Bank journals are discovered automatically, so a new one appears with no further setup.</li>
+    <li>No account codes, journal names or dates are hardcoded.</li>
+    <li>Only posted entries are counted, unless draft entries are enabled on the report.</li>
+    <li>Requires Odoo Enterprise (depends on <code>account_reports</code>).</li>
+  </ul>
+
+  <div style="margin-top:48px;padding-top:24px;border-top:1px solid #e2e8f0;color:#64748b;font-size:15px;">
+    Developed by Abel Takele &middot; <a href="https://github.com/abelfree" style="color:#1f3d5c;">github.com/abelfree</a>
+  </div>
+
+</div>
+</body>
+</html>
